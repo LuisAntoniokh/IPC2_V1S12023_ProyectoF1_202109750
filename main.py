@@ -1,4 +1,7 @@
 from colorama import Fore
+from Lists.simpleList import ListaEnlazada
+
+pclave = ['administrador', 'Luis', 'Castro', '202109750', 'a', 'a'] 
 
 def canBol():
     pass
@@ -231,5 +234,11 @@ def Pantalla_Inicial():
     else:
         print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
         Pantalla_Inicial()
+
+lista = ListaEnlazada()
+print("Cargando XML para lista enlazada ...")
+lista.CargarXML(1)
+
+lista.Imprimir()
 
 Pantalla_Inicial()
