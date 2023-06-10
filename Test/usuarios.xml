@@ -15,4 +15,4 @@
  <correo>jane.smith@example.com</correo>
  <contrasena>password456</contrasena>
  </usuario>
-</usuarios>
+<usuario><rol>Administrador</rol><nombre>SCP-</nombre><apellido>049</apellido><telefono>12345678</telefono><correo>scp@gmail.com</correo><contrasena>Plaga</contrasena></usuario><usuario><rol>Cliente</rol><nombre>r</nombre><apellido>r</apellido><telefono>r</telefono><correo>r@gmail.com</correo><contrasena>r</contrasena></usuario><usuario><rol>Cliente</rol><nombre>t</nombre><apellido>t</apellido><telefono>t</telefono><correo>t@gmail.com</correo><contrasena>t</contrasena></usuario><usuario><rol>Cliente</rol><nombre>u</nombre><apellido>u</apellido><telefono>u</telefono><correo>u@gmail.com</correo><contrasena>u</contrasena></usuario></usuarios>

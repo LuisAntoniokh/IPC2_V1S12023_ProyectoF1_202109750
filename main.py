@@ -1,5 +1,10 @@
 from colorama import Fore
 from Lists.simpleList import ListaEnlazada
+import xml.etree.ElementTree as ET
+
+from Objects.user import Usuario
+
+lPrincipal = ListaEnlazada()
 
 pclave = ['administrador', 'Luis', 'Castro', '202109750', 'a', 'a'] 
 
@@ -15,8 +20,8 @@ def delCat():
     pass
 
 def gesBoletos():
-    print(Fore.WHITE + "1. Cancelar boletos")
-    print(Fore.WHITE + "2. Regresar al menú")
+    print(Fore.WHITE + "\n1. Cancelar boletos")
+    print(Fore.WHITE + "2. Regresar al menú\n")
 
     sextoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
@@ -29,11 +34,11 @@ def gesBoletos():
         gesBoletos()
 
 def gesCat():
-    print(Fore.WHITE + "1. Ver categorías")
+    print(Fore.WHITE + "\n1. Ver categorías")
     print(Fore.WHITE + "2. Agregar categorías")
     print(Fore.WHITE + "3. Modificar categorías")
     print(Fore.WHITE + "4. Eliminar categorías")
-    print(Fore.WHITE + "5. Regresar a gestiones")
+    print(Fore.WHITE + "5. Regresar a gestiones\n")
 
     quintoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
@@ -52,11 +57,11 @@ def gesCat():
         gesCat()
 
 def gesSal():
-    print(Fore.WHITE + "1. Ver salas")
+    print(Fore.WHITE + "\n1. Ver salas")
     print(Fore.WHITE + "2. Agregar salas")
     print(Fore.WHITE + "3. Modificar salas")
     print(Fore.WHITE + "4. Eliminar salas")
-    print(Fore.WHITE + "5. Regresar a gestiones")
+    print(Fore.WHITE + "5. Regresar a gestiones\n")
 
     quintoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
@@ -74,20 +79,44 @@ def gesSal():
         print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
         gesSal()
 
+def modUser():
+    print(Fore.BLUE + "\n===== Modificación de usuario =====")
+    Email = input(Fore.BLUE + "Ingrese su correo: ")
+    Role = input(Fore.BLUE + "Ingrese su nuevo rol: ")
+    Nombre = input(Fore.BLUE + "Ingrese su nuevo nombre: ")
+    Apellido = input(Fore.BLUE + "Ingrese su nuevo apellido: ")
+    Telefono = input(Fore.BLUE + "Ingrese su nuevo teléfono: ")
+    Password = input(Fore.BLUE + "Ingrese su nueva contraseña: ")
+
+    lPrincipal.editarXML(Role, Nombre, Apellido, Telefono, Email, Password)
+
+    print(Fore.BLUE + "\nEl Usuario ha sido modificado correctamente\n")
+
+def delUser():
+    print(Fore.BLUE + "\n===== Modificación de usuario =====")
+    Email = input(Fore.BLUE + "Ingrese su correo: ")
+    lPrincipal.eliminarXML(Email)
+    print(Fore.BLUE + "\nEl Usuario ha sido eliminado correctamente\n")
+
 def gesUser():
-    print(Fore.WHITE + "1. Ver usuarios")
+    print(Fore.WHITE + "\n1. Ver usuarios")
     print(Fore.WHITE + "2. Modificar usuarios")
     print(Fore.WHITE + "3. Eliminar usuarios")
-    print(Fore.WHITE + "4. Regresar a gestiones")
+    print(Fore.WHITE + "4. Regresar a gestiones\n")
 
-    quintoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
+    quintoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar?")
 
     if quintoPaso == "1":
-        verCat()
+        lPrincipal.CargarXML(1)
+        lPrincipal.Imprimir()
+        print(Fore.GREEN + "Datos cargados al sistema \n")
+        gesUser()
     elif quintoPaso == "2":
-        modCat()
+        modUser()
+        gesUser()
     elif quintoPaso == "3":
-        delCat()
+        delUser()
+        gesUser()
     elif quintoPaso == "4":
         MenAdmin()
     else:
@@ -95,7 +124,7 @@ def gesUser():
         gesUser()
 
 def MenAdmin():
-    print(Fore.LIGHTMAGENTA_EX + "\n==== Opciones ====")
+    print(Fore.LIGHTMAGENTA_EX + "\n========== Opciones =============")
     print(Fore.LIGHTMAGENTA_EX + "1. Gestionar boletos")
     print(Fore.LIGHTMAGENTA_EX + "2. Gestionar categorías y películas")
     print(Fore.LIGHTMAGENTA_EX + "3. Gestionar salas")
@@ -159,11 +188,7 @@ def Iniciar_sesion():
     Contra = input(Fore.YELLOW + "Ingrese su contraseña: ")
     print(Fore.YELLOW + "================================= \n")
 
-    """if user = Cliente:
-            cliente()
-        if user = Admin:
-            Admin()
-    """
+    MenAdmin()
 
 def Registrar_usuario():
     print(Fore.BLUE + "\n===== Registro de usuario =====")
@@ -172,6 +197,9 @@ def Registrar_usuario():
     Telefono = input(Fore.BLUE + "Ingrese su teléfono: ")
     Email = input(Fore.BLUE + "Ingrese su correo: ")
     Password = input(Fore.BLUE + "Ingrese su contraseña: ")
+
+    lPrincipal.agregarXML(Nombre, Apellido, Telefono, Email, Password)
+    
     print(Fore.BLUE + "\nSe ha registrado un nuevo usuario")
     print(Fore.BLUE + "================================= \n")
 
@@ -221,6 +249,7 @@ def Pantalla_Inicial():
     print(Fore.CYAN + "| 1. Iniciar sesión             |")
     print(Fore.CYAN + "| 2. Registar usuario           |")
     print(Fore.CYAN + "| 3. Ver listado de películas   |")
+    print(Fore.CYAN + "| 4. Cerrar programa            |")
     print(Fore.CYAN + "================================= \n")
 
     primerPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
@@ -231,14 +260,10 @@ def Pantalla_Inicial():
         Registrar_usuario()
     elif primerPaso == "3": 
         Ver_listado()
+    elif primerPaso == "4": 
+        exit()
     else:
         print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
         Pantalla_Inicial()
-
-lista = ListaEnlazada()
-print("Cargando XML para lista enlazada ...")
-lista.CargarXML(1)
-
-lista.Imprimir()
 
 Pantalla_Inicial()

@@ -1,3 +1,5 @@
+from colorama import Fore
+
 class Usuario():
     def __init__(self, rol, nombre, apellido, telefono, correo, contraseña):
         self.rol = rol
@@ -8,5 +10,5 @@ class Usuario():
         self.contraseña = contraseña
 
     def imprimir(self):
-        print(f"Nombre: {self.nombre}, Apellido: {self.apellido}, Rol: {self.rol}, Telefono: {self.telefono}, Correo: {self.correo}, Contraseña: {self.contraseña}")
+        print(Fore.CYAN + f"Nombre: {self.nombre}, Apellido: {self.apellido}, Rol: {self.rol}, Telefono: {self.telefono}, Correo: {self.correo}, Contraseña: {self.contraseña}")
         
