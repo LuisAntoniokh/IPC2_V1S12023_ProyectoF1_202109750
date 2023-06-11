@@ -1,6 +1,6 @@
 <categorias>
  <categoria>
- <nombre>Acción</nombre>
+ <nombre>Acci&#243;n</nombre>
  <peliculas>
  <pelicula>
  <titulo>Avengers: Endgame</titulo>
@@ -17,7 +17,7 @@
  <hora>20:00</hora>
  </pelicula>
  <pelicula>
- <titulo>Misión Imposible: Fallout</titulo>
+ <titulo>Misi&#243;n Imposible: Fallout</titulo>
  <director>Christopher McQuarrie</director>
  <anio>2018</anio>
  <fecha>2023-06-07</fecha>
@@ -51,4 +51,16 @@
  </pelicula>
  </peliculas>
  </categoria>
-</categorias>
+<categoria>
+<nombre>Terror</nombre>
+<peliculas>
+<pelicula>
+<titulo>As&#237; en la tierra como en el infierno</titulo>
+<director>John Dwodle</director>
+<anio>2014</anio>
+<fecha>2023-06-11</fecha>
+<hora>23:50</hora>
+</pelicula>
+</peliculas>
+</categoria>
+<categoria><nombre>Ciencia ficci&#243;n</nombre><peliculas><pelicula><titulo>Star wars</titulo><director>xd</director><anio>xd</anio><fecha>2023-06-11</fecha><hora>01:00</hora></pelicula><pelicula><titulo>si</titulo><director>no</director><anio>no</anio><fecha>no</fecha><hora>no</hora></pelicula></peliculas></categoria></categorias>

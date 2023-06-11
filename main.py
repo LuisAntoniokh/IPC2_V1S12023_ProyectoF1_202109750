@@ -10,12 +10,52 @@ lenCircular = listaDobleCircular()
 
 def canBol():
     pass
+
 def AgCat():
-    pass
+    print(Fore.BLUE + "\n===== Registro de categoría y película =====")
+    Categoria = input(Fore.BLUE + "Ingrese la categoría: ")
+    Titulo = input(Fore.BLUE + "Ingrese el título: ")
+    Director = input(Fore.BLUE + "Ingrese el director: ")
+    Anio = input(Fore.BLUE + "Ingrese el anio: ")
+    Fecha = input(Fore.BLUE + "Ingrese la fecha: ")
+    Hora = input(Fore.BLUE + "Ingrese la hora: ")
+
+    def regresarMenuP():
+        print(Fore.BLUE + "1. Registrar una nueva película")
+        print(Fore.BLUE + "2. Regresar al menú de películas \n")
+        tercerPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
+
+        if tercerPaso == "1":
+            AgCat()
+        elif tercerPaso == "2":
+            gesCat()
+        else:
+            print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
+            regresarMenuP()
+
+    lenCircular.agregarXML_LDC(Categoria, Titulo, Director, Anio, Fecha, Hora)
+    print(Fore.BLUE + "\nSe ha registrado una nueva función")
+    print(Fore.BLUE + "================================= \n")
+    regresarMenuP()
+    
 def modCat():
-    pass
+    print(Fore.BLUE + "\n===== Modificación de película =====")
+    Titulo = input(Fore.BLUE + "Ingrese el título de la película a modificar: ")
+    Director = input(Fore.BLUE + "Ingrese el nuevo director: ")
+    Anio = input(Fore.BLUE + "Ingrese el nuevo año: ")
+    Fecha = input(Fore.BLUE + "Ingrese la nueva fecha: ")
+    Hora = input(Fore.BLUE + "Ingrese la nueva hora: ")
+
+    lenCircular.editarXML_LDC(Titulo, Director, Anio, Fecha, Hora)
+
+    print(Fore.BLUE + "\nLa película ha sido modificada correctamente\n")
+
 def delCat():
-    pass
+    print(Fore.BLUE + "\n===== Eliminación de película =====")
+    titulo = input(Fore.BLUE + "Ingrese el título: ")
+    lenCircular.eliminar_DLC(titulo)
+    lenCircular.delete(titulo)
+    print(Fore.BLUE + "\nEl Usuario ha sido eliminado correctamente\n")
 
 def gesBoletos():
     print(Fore.WHITE + "\n1. Cancelar boletos")
@@ -52,8 +92,10 @@ def gesCat():
         AgCat()
     elif quintoPaso == "4":
         modCat()
+        gesCat()
     elif quintoPaso == "5":
         delCat()
+        gesCat()
     elif quintoPaso == "6":
         MenAdmin()
     else:
@@ -262,7 +304,8 @@ def Ver_listado():
     segundoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
     if segundoPaso == "1":
-        genList()
+        lenCircular.Imprimir_LDC()
+        Ver_listado()
     elif segundoPaso == "2":
         catList()
     elif segundoPaso == "3": 

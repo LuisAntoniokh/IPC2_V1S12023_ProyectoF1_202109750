@@ -44,7 +44,7 @@ class listaDobleCircular:
                 self.cabeza.back = nuevo_nodo
                 ultimo.next = nuevo_nodo
             self.elemento_cargado.add(titulo)
-            
+
     def modify(self, data_nuevo, index):
         if self.cabeza is None:
             return
@@ -63,11 +63,11 @@ class listaDobleCircular:
 
             indice += 1
 
-    def delete(self, correo):
+    def delete(self, titulo):
         if self.cabeza is None:
             return
 
-        if self.cabeza.data.correo == correo:
+        if self.cabeza.data.Titulo == titulo:
             if self.cabeza.next == self.cabeza:
                 self.cabeza = None
             else:
@@ -79,7 +79,7 @@ class listaDobleCircular:
 
         nodo_actual = self.cabeza
         while True:
-            if nodo_actual.next.data.correo == correo:
+            if nodo_actual.next.data.Titulo == titulo:
                 nodo_siguiente = nodo_actual.next
                 nodo_actual.next = nodo_siguiente.next
                 nodo_siguiente.next.back = nodo_actual
@@ -128,3 +128,88 @@ class listaDobleCircular:
                 else:
                     print(f"La película '{titulo}' ya está cargada en la lista.")
     
+    def agregarXML_LDC(self, Categoria, Titulo, Director, Anio, Fecha, Hora):
+        tree = ET.parse('C:/Users/User/Documents/USAC/Vaqueras V Semestre/Lab/IPC2_V1S12023_ProyectoF1_202109750/Test/peliculas.xml')
+        root = tree.getroot()
+
+        # Buscar si la categoría ya existe en el XML
+        categoria_existente = None
+        for categoria in root.findall("categoria"):
+            nombre = categoria.find('nombre').text
+            if nombre == Categoria:
+                categoria_existente = categoria
+                break
+
+        if categoria_existente is None:
+            # Crear una nueva etiqueta de categoría
+            nueva_cat = ET.Element("categoria")
+
+            categoria = ET.SubElement(nueva_cat, 'nombre')
+            categoria.text = Categoria
+
+            peliculas = ET.SubElement(nueva_cat, 'peliculas')
+
+            root.append(nueva_cat)
+        else:
+            peliculas = categoria_existente.find('peliculas')
+
+        # Crear una nueva etiqueta de película
+        nueva_peli = ET.Element("pelicula")
+
+        titulo = ET.SubElement(nueva_peli, 'titulo')
+        titulo.text = Titulo
+
+        director = ET.SubElement(nueva_peli, 'director')
+        director.text = Director
+
+        anio = ET.SubElement(nueva_peli, 'anio')
+        anio.text = Anio
+
+        fecha = ET.SubElement(nueva_peli, 'fecha')
+        fecha.text = Fecha
+
+        hora = ET.SubElement(nueva_peli, 'hora')
+        hora.text = Hora
+
+        objeto = Pelicula(Categoria, Titulo, Director, Anio, Fecha, Hora)
+        self.add(objeto)
+
+        peliculas.append(nueva_peli)
+
+        tree.write('C:/Users/User/Documents/USAC/Vaqueras V Semestre/Lab/IPC2_V1S12023_ProyectoF1_202109750/Test/peliculas.xml')
+        
+    def editarXML_LDC(self, titulo, nuevo_director, nuevo_anio, nueva_fecha, nueva_hora):
+        tree = ET.parse('C:/Users/User/Documents/USAC/Vaqueras V Semestre/Lab/IPC2_V1S12023_ProyectoF1_202109750/Test/peliculas.xml')
+        root = tree.getroot()
+
+        for categoria_elem in root.findall('categoria'):
+            peliculas = categoria_elem.find('peliculas')
+
+            for pelicula in peliculas.findall('pelicula'):
+                if pelicula.find('titulo').text == titulo:
+                    pelicula.find('director').text = nuevo_director
+                    pelicula.find('anio').text = nuevo_anio
+                    pelicula.find('fecha').text = nueva_fecha
+                    pelicula.find('hora').text = nueva_hora
+                    break
+
+        tree.write('C:/Users/User/Documents/USAC/Vaqueras V Semestre/Lab/IPC2_V1S12023_ProyectoF1_202109750/Test/peliculas.xml')
+        self.CargarXML_LDC(2)
+    
+    def eliminar_DLC(self, titulo):
+        tree = ET.parse('C:/Users/User/Documents/USAC/Vaqueras V Semestre/Lab/IPC2_V1S12023_ProyectoF1_202109750/Test/peliculas.xml')
+        root = tree.getroot()
+
+        for pelicula in root.findall('pelicula'):
+            if pelicula.find('titulo').text == titulo:
+                root.remove(pelicula)
+                break
+
+        tree.write('C:/Users/User/Documents/USAC/Vaqueras V Semestre/Lab/IPC2_V1S12023_ProyectoF1_202109750/Test/peliculas.xml')
+
+
+
+
+
+
+
