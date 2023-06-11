@@ -6,6 +6,14 @@ class ListaEnlazada:
     def __init__(self):
         self.cabeza = None
 
+    def existe_usuario_correo(self, correo):
+        actual = self.cabeza
+        while actual is not None:
+            if actual.data.correo == correo:
+                return True
+            actual = actual.next
+        return False
+
     def add(self, data):        
         nuevo = NodoSimple(data)
         if self.cabeza is None:
@@ -13,7 +21,12 @@ class ListaEnlazada:
         else:
             actual = self.cabeza
             while actual.next is not None:
+                if actual.data.correo == data.correo:
+                    return
                 actual = actual.next
+            actual.next = nuevo
+            if actual.data.correo == data.correo:
+                return
             actual.next = nuevo
 
     def modify(self, data_nuevo, index):
@@ -27,52 +40,48 @@ class ListaEnlazada:
             indice += 1
             actual = actual.next
 
-    def delete(self, data):
+    def delete(self, correo):
         # Check if list is empty
         if self.cabeza is None:
             return
 
         # If the node to delete is the head node
-        if self.cabeza.data == data:
+        if self.cabeza.data.correo == correo:
             self.cabeza = self.cabeza.next
             return
 
         # Find the node to delete
         actual = self.cabeza
         while actual.next is not None:
-            if actual.next.data == data:
-                break
+            if actual.next.data.correo == correo:
+                actual.next = actual.next.next
+                return
             actual = actual.next
-
-        # If node was not found
-        if actual.next is None:
-            return
-
-        # Unlink the node from linked list
-        actual.next = actual.next.next
 
     def Imprimir(self):
         actual = self.cabeza
-        actual.data.imprimir()
-        while actual.next is not None:
+        while actual is not None:
+            actual.data.imprimir()  # Llamar al método 'imprimir' del objeto Usuario
             actual = actual.next
-            actual.data.imprimir()
 
     def CargarXML(self, operacion):
         tree = ET.parse('C:/Users/User/Documents/USAC/Vaqueras V Semestre/Lab/IPC2_V1S12023_ProyectoF1_202109750/Test/usuarios.xml')
         root = tree.getroot()
 
-        for indice, usuarios in enumerate(root.findall('usuario')):
-            rol = usuarios.find('rol').text
-            nombre = usuarios.find('nombre').text
-            apellido = usuarios.find('apellido').text
-            telefono = usuarios.find('telefono').text
-            correo = usuarios.find('correo').text
-            contraseña = usuarios.find('contrasena').text
+        for indice, usuario in enumerate(root.findall('usuario')):
+            rol = usuario.find('rol').text
+            nombre = usuario.find('nombre').text
+            apellido = usuario.find('apellido').text
+            telefono = usuario.find('telefono').text
+            correo = usuario.find('correo').text
+            contrasena = usuario.find('contrasena').text
 
-            objeto = Usuario(rol, nombre, apellido, telefono, correo, contraseña)
-            
-            if operacion == 1: # agregar datas a lista
+            objeto = Usuario(rol, nombre, apellido, telefono, correo, contrasena)
+
+            if self.existe_usuario_correo(objeto):
+               continue  # Saltar el usuario repetido
+
+            if operacion == 1:
                 self.add(objeto)
             elif operacion == 2:
                 self.modify(objeto, indice)
@@ -103,7 +112,7 @@ class ListaEnlazada:
         contraseña = ET.SubElement(nuevo_cliente, 'contrasena')
         contraseña.text = Password
 
-        objeto = Usuario(rol, nombre, apellido, telefono, correo, contraseña)
+        objeto = Usuario(rol.text, nombre.text, apellido.text, telefono.text, correo.text, contraseña.text)
         self.add(objeto)
 
         root.append(nuevo_cliente)
@@ -144,5 +153,3 @@ class ListaEnlazada:
                 break
 
         tree.write('C:/Users/User/Documents/USAC/Vaqueras V Semestre/Lab/IPC2_V1S12023_ProyectoF1_202109750/Test/usuarios.xml')
-
-        self.CargarXML(3)

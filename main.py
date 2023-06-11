@@ -1,16 +1,14 @@
 from colorama import Fore
 from Lists.simpleList import ListaEnlazada
+from Lists.dobleCircle import listaDobleCircular
 import xml.etree.ElementTree as ET
 
 from Objects.user import Usuario
 
-lPrincipal = ListaEnlazada()
-
-pclave = ['administrador', 'Luis', 'Castro', '202109750', 'a', 'a'] 
+lenSimple = ListaEnlazada()
+lenCircular = listaDobleCircular()
 
 def canBol():
-    pass
-def verCat():
     pass
 def AgCat():
     pass
@@ -34,23 +32,29 @@ def gesBoletos():
         gesBoletos()
 
 def gesCat():
-    print(Fore.WHITE + "\n1. Ver categorías")
-    print(Fore.WHITE + "2. Agregar categorías")
-    print(Fore.WHITE + "3. Modificar categorías")
-    print(Fore.WHITE + "4. Eliminar categorías")
-    print(Fore.WHITE + "5. Regresar a gestiones\n")
+    print(Fore.WHITE + "\n1. Cargar categorías y películas")
+    print(Fore.WHITE + "2. Ver categorías y películas")
+    print(Fore.WHITE + "3. Agregar categorías y películas")
+    print(Fore.WHITE + "4. Modificar categorías y películas")
+    print(Fore.WHITE + "5. Eliminar categorías y películas")
+    print(Fore.WHITE + "6. Regresar a gestiones\n")
 
     quintoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
     if quintoPaso == "1":
-        verCat()
+        lenCircular.CargarXML_LDC(1)
+        print(Fore.GREEN + "Datos cargados al sistema")
+        gesCat()
     elif quintoPaso == "2":
-        AgCat()
+        lenCircular.Imprimir_LDC()
+        gesCat()
     elif quintoPaso == "3":
-        modCat()
+        AgCat()
     elif quintoPaso == "4":
-        delCat()
+        modCat()
     elif quintoPaso == "5":
+        delCat()
+    elif quintoPaso == "6":
         MenAdmin()
     else:
         print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
@@ -66,7 +70,7 @@ def gesSal():
     quintoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
     if quintoPaso == "1":
-        verCat()
+        pass
     elif quintoPaso == "2":
         AgCat()
     elif quintoPaso == "3":
@@ -88,36 +92,40 @@ def modUser():
     Telefono = input(Fore.BLUE + "Ingrese su nuevo teléfono: ")
     Password = input(Fore.BLUE + "Ingrese su nueva contraseña: ")
 
-    lPrincipal.editarXML(Role, Nombre, Apellido, Telefono, Email, Password)
+    lenSimple.editarXML(Role, Nombre, Apellido, Telefono, Email, Password)
 
     print(Fore.BLUE + "\nEl Usuario ha sido modificado correctamente\n")
 
 def delUser():
     print(Fore.BLUE + "\n===== Modificación de usuario =====")
     Email = input(Fore.BLUE + "Ingrese su correo: ")
-    lPrincipal.eliminarXML(Email)
+    lenSimple.eliminarXML(Email)
+    lenSimple.delete(Email)
     print(Fore.BLUE + "\nEl Usuario ha sido eliminado correctamente\n")
 
 def gesUser():
-    print(Fore.WHITE + "\n1. Ver usuarios")
-    print(Fore.WHITE + "2. Modificar usuarios")
-    print(Fore.WHITE + "3. Eliminar usuarios")
-    print(Fore.WHITE + "4. Regresar a gestiones\n")
+    print(Fore.WHITE + "\n1. Cargar datos")
+    print(Fore.WHITE + "2. Ver usuarios")
+    print(Fore.WHITE + "3. Modificar usuarios")
+    print(Fore.WHITE + "4. Eliminar usuarios")
+    print(Fore.WHITE + "5. Regresar a gestiones\n")
 
-    quintoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar?")
+    quintoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
     if quintoPaso == "1":
-        lPrincipal.CargarXML(1)
-        lPrincipal.Imprimir()
-        print(Fore.GREEN + "Datos cargados al sistema \n")
+        lenSimple.CargarXML(1)
+        print(Fore.GREEN + "Datos cargados al sistema")
         gesUser()
     elif quintoPaso == "2":
-        modUser()
+        lenSimple.Imprimir()
         gesUser()
     elif quintoPaso == "3":
+        modUser()
+        gesUser()        
+    elif quintoPaso == "4":
         delUser()
         gesUser()
-    elif quintoPaso == "4":
+    elif quintoPaso == "5":
         MenAdmin()
     else:
         print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
@@ -125,11 +133,11 @@ def gesUser():
 
 def MenAdmin():
     print(Fore.LIGHTMAGENTA_EX + "\n========== Opciones =============")
-    print(Fore.LIGHTMAGENTA_EX + "1. Gestionar boletos")
-    print(Fore.LIGHTMAGENTA_EX + "2. Gestionar categorías y películas")
-    print(Fore.LIGHTMAGENTA_EX + "3. Gestionar salas")
-    print(Fore.LIGHTMAGENTA_EX + "4. Gestionar usuarios")
-    print(Fore.LIGHTMAGENTA_EX + "5. Regresar al menú")
+    print(Fore.LIGHTMAGENTA_EX + "1. Gestionar boletos ")
+    print(Fore.LIGHTMAGENTA_EX + "2. Gestionar categorías y películas ")
+    print(Fore.LIGHTMAGENTA_EX + "3. Gestionar salas ")
+    print(Fore.LIGHTMAGENTA_EX + "4. Gestionar usuarios ")
+    print(Fore.LIGHTMAGENTA_EX + "5. Regresar al menú ")
     print(Fore.LIGHTMAGENTA_EX + "============================\n")
 
     cuartoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
@@ -159,11 +167,11 @@ def favPel():
 
 def MenCliente():
     print(Fore.LIGHTMAGENTA_EX + "\n======== Opciones =========")
-    print(Fore.LIGHTMAGENTA_EX + "1. Listado películas")
-    print(Fore.LIGHTMAGENTA_EX + "2. Comprar boletos")
-    print(Fore.LIGHTMAGENTA_EX + "3. Historial boletos")
-    print(Fore.LIGHTMAGENTA_EX + "4. Películas favoritas")
-    print(Fore.LIGHTMAGENTA_EX + "5. Regresar al menú")
+    print(Fore.LIGHTMAGENTA_EX + "1. Listado películas ")
+    print(Fore.LIGHTMAGENTA_EX + "2. Comprar boletos ")
+    print(Fore.LIGHTMAGENTA_EX + "3. Historial boletos ")
+    print(Fore.LIGHTMAGENTA_EX + "4. Películas favoritas ")
+    print(Fore.LIGHTMAGENTA_EX + "5. Regresar al menú ")
     print(Fore.LIGHTMAGENTA_EX + "============================\n")
 
     cuartoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
@@ -184,24 +192,35 @@ def MenCliente():
 
 def Iniciar_sesion():
     print(Fore.YELLOW + "\n======= Inicio de sesión ========")
-    Correo = input(Fore.YELLOW + "Ingrese su correo: ")
-    Contra = input(Fore.YELLOW + "Ingrese su contraseña: ")
+    Email = input(Fore.YELLOW + "Ingrese su correo: ")
+    Password = input(Fore.YELLOW + "Ingrese su contraseña: ")
     print(Fore.YELLOW + "================================= \n")
 
-    MenAdmin()
+    actual = lenSimple.cabeza
+    while actual is not None:
+        if actual.data.correo == Email:
+            if actual.data.contraseña == Password:
+                print(Fore.GREEN+"Inicio de sesión exitoso")
+                if actual.data.rol == "Cliente" or actual.data.rol == "cliente":
+                    MenCliente()
+                elif actual.data.rol == "Administrador" or actual.data.rol == "administrador":
+                    MenAdmin()
+                else:
+                    print(Fore.RED+"Usuario no encontrado")
+                return
+            else:
+                print(Fore.RED+"Contraseña incorrecta")
+                return
+        actual = actual.next
+    print(Fore.RED+"Correo electrónico no encontrado")
 
 def Registrar_usuario():
     print(Fore.BLUE + "\n===== Registro de usuario =====")
     Nombre = input(Fore.BLUE + "Ingrese su nombre: ")
     Apellido = input(Fore.BLUE + "Ingrese su apellido: ")
     Telefono = input(Fore.BLUE + "Ingrese su teléfono: ")
-    Email = input(Fore.BLUE + "Ingrese su correo: ")
+    correo = input(Fore.BLUE + "Ingrese su correo: ")
     Password = input(Fore.BLUE + "Ingrese su contraseña: ")
-
-    lPrincipal.agregarXML(Nombre, Apellido, Telefono, Email, Password)
-    
-    print(Fore.BLUE + "\nSe ha registrado un nuevo usuario")
-    print(Fore.BLUE + "================================= \n")
 
     def regresarMenuP():
         print(Fore.BLUE + "1. Registrar un nuevo usuario")
@@ -215,6 +234,15 @@ def Registrar_usuario():
         else:
             print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
             regresarMenuP()
+
+    if lenSimple.existe_usuario_correo(correo):
+        print(Fore.RED + "El correo ingresado ya está registrado.")
+        regresarMenuP()
+    else:
+        lenSimple.agregarXML(Nombre, Apellido, Telefono, correo, Password)
+        print(Fore.BLUE + "\nSe ha registrado un nuevo usuario")
+        print(Fore.BLUE + "================================= \n")
+        regresarMenuP()
 
     regresarMenuP()
 
@@ -265,5 +293,8 @@ def Pantalla_Inicial():
     else:
         print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
         Pantalla_Inicial()
+
+UserPrincipal = Usuario("administrador", "Luis", "Castro", "202109750", "a", "a")
+lenSimple.add(UserPrincipal)
 
 Pantalla_Inicial()
