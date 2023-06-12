@@ -1,15 +1,14 @@
 from colorama import Fore
 from Lists.simpleList import ListaEnlazada
 from Lists.dobleCircle import listaDobleCircular
+from Lists.dobleLinked import ListaDobleEnlazada
 import xml.etree.ElementTree as ET
 
 from Objects.user import Usuario
 
 lenSimple = ListaEnlazada()
 lenCircular = listaDobleCircular()
-
-def canBol():
-    pass
+lenDoble = ListaDobleEnlazada()
 
 def AgCat():
     print(Fore.BLUE + "\n===== Registro de categoría y película =====")
@@ -57,20 +56,6 @@ def delCat():
     lenCircular.delete(titulo)
     print(Fore.BLUE + "\nEl Usuario ha sido eliminado correctamente\n")
 
-def gesBoletos():
-    print(Fore.WHITE + "\n1. Cancelar boletos")
-    print(Fore.WHITE + "2. Regresar al menú\n")
-
-    sextoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
-
-    if sextoPaso == "1":
-        canBol()
-    elif sextoPaso == "2":
-        MenAdmin()
-    else:
-        print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
-        gesBoletos()
-
 def gesCat():
     print(Fore.WHITE + "\n1. Cargar categorías y películas")
     print(Fore.WHITE + "2. Ver categorías y películas")
@@ -102,24 +87,70 @@ def gesCat():
         print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
         gesCat()
 
+def AgSal():
+    print(Fore.BLUE + "\n===== Registro de sala =====")
+    Asientos = input(Fore.BLUE + "Ingrese la cantidad de asientos: ")
+
+    def regresarMenuP():
+        print(Fore.BLUE + "1. Registrar una nueva sala")
+        print(Fore.BLUE + "2. Regresar al menú de salas \n")
+        tercerPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
+
+        if tercerPaso == "1":
+            AgSal()
+        elif tercerPaso == "2":
+            gesSal()
+        else:
+            print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
+            regresarMenuP()
+
+    lenDoble.agregarXML_LED(Asientos)
+    print(Fore.BLUE + "\nSe ha registrado una nueva sala")
+    print(Fore.BLUE + "================================= \n")
+    regresarMenuP()
+
+def modSal():
+    print(Fore.BLUE + "\n===== Modificación de salas =====")
+    Sale = input(Fore.BLUE + "Ingrese la sala a modificar: ")
+    chairs = input(Fore.BLUE + "Ingrese el nuevo numero de asientos: ")
+
+    lenDoble.editarXML_LED(Sale, chairs)
+
+    print(Fore.BLUE + "\nLa película ha sido modificada correctamente\n")
+
+def delSal():
+    print(Fore.BLUE + "\n===== Eliminación de sala =====")
+    sala = input(Fore.BLUE + "Ingrese el título: ")
+    lenDoble.eliminar_LED(sala)
+    lenDoble.delete(sala)
+    print(Fore.BLUE + "\nEl Usuario ha sido eliminado correctamente\n") 
+
 def gesSal():
-    print(Fore.WHITE + "\n1. Ver salas")
-    print(Fore.WHITE + "2. Agregar salas")
-    print(Fore.WHITE + "3. Modificar salas")
-    print(Fore.WHITE + "4. Eliminar salas")
-    print(Fore.WHITE + "5. Regresar a gestiones\n")
+    print(Fore.WHITE + "\n1. Cargar salas")
+    print(Fore.WHITE + "2. Ver salas")
+    print(Fore.WHITE + "3. Agregar salas")
+    print(Fore.WHITE + "4. Modificar salas")
+    print(Fore.WHITE + "5. Eliminar salas")
+    print(Fore.WHITE + "6. Regresar a gestiones\n")
 
     quintoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
     if quintoPaso == "1":
-        pass
+        lenDoble.CargarXML_LED(1)
+        print(Fore.GREEN + "Datos cargados al sistema")
+        gesSal()
     elif quintoPaso == "2":
-        AgCat()
+        lenDoble.mostrar()
+        gesSal()
     elif quintoPaso == "3":
-        modCat()
+        AgSal()
     elif quintoPaso == "4":
-        delCat()
+        modSal()
+        gesSal()
     elif quintoPaso == "5":
+        delSal()
+        gesSal()
+    elif quintoPaso == "6":
         MenAdmin()
     else:
         print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
@@ -172,6 +203,20 @@ def gesUser():
     else:
         print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
         gesUser()
+
+def gesBoletos():
+    print(Fore.WHITE + "\n1. Cancelar boletos")
+    print(Fore.WHITE + "2. Regresar al menú\n")
+
+    sextoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
+
+    if sextoPaso == "1":
+        pass
+    elif sextoPaso == "2":
+        MenAdmin()
+    else:
+        print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
+        gesBoletos()
 
 def MenAdmin():
     print(Fore.LIGHTMAGENTA_EX + "\n========== Opciones =============")
@@ -288,8 +333,6 @@ def Registrar_usuario():
 
     regresarMenuP()
 
-def genList():
-    pass
 
 def catList():
     pass
