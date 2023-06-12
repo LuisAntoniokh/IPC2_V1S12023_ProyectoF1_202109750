@@ -25,7 +25,7 @@ class ListaDobleEnlazada:
     def mostrar(self):
         current = self.cabeza
         while current is not None:
-            print(f"Cine: {current.data.cine}, Numero de sala: {current.data.num_sala}, Asiento: {current.data.asiento}")
+            print(f"{current.data.cine}, Numero de sala: {current.data.num_sala}, Asiento: {current.data.asiento}")
             current = current.next
 
     def delete(self, data):
@@ -118,7 +118,7 @@ class ListaDobleEnlazada:
         nodo_actual = self.cabeza
 
         while nodo_actual is not None:
-            if nodo_actual.data.num_sala.startswith('#USACIPC2_202212333_'):
+            if nodo_actual.data.num_sala.startswith('USACIPC2_202109750_'):
                 titulo_existe = True
                 break
             nodo_actual = nodo_actual.next
@@ -129,12 +129,12 @@ class ListaDobleEnlazada:
             nodo_actual = self.cabeza
 
             while nodo_actual is not None:
-                if nodo_actual.data.num_sala == '#USACIPC2_202212333_' + str(index):
+                if nodo_actual.data.num_sala == 'USACIPC2_202109750_' + str(index):
                     titulo_existe = True
                     break
                 nodo_actual = nodo_actual.next
 
-        titulo = '#USACIPC2_202212333_' + str(index)
+        titulo = '#USACIPC2_202109750_' + str(index)
 
         elemento_titulo = ET.SubElement(nuevo_sala, 'numero')
         elemento_titulo.text = titulo

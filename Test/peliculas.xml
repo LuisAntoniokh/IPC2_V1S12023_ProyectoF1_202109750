@@ -49,7 +49,7 @@
  <fecha>2023-06-07</fecha>
  <hora>20:15</hora>
  </pelicula>
- </peliculas>
+ <pelicula><titulo>South Park</titulo><director>Trey Parker</director><anio>1999</anio><fecha>2023-06-13</fecha><hora>18:00</hora></pelicula></peliculas>
  </categoria>
 <categoria>
 <nombre>Terror</nombre>

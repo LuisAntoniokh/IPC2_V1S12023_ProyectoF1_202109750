@@ -1,19 +1,19 @@
 <cines>
  <cine>
- <nombre>Cine ABC</nombre>
+ <nombre>Cine SCP</nombre>
  <salas>
  <sala>
- <numero>#USACIPC2_202212333_1</numero>
+ <numero>#USACIPC2_202109750_1</numero>
  <asientos>100</asientos>
  </sala>
  <sala>
- <numero>#USACIPC2_202212333_2</numero>
+ <numero>#USACIPC2_202109750_2</numero>
  <asientos>80</asientos>
  </sala>
  <sala>
- <numero>#USACIPC2_202212333_3</numero>
+ <numero>#USACIPC2_202109750_3</numero>
  <asientos>200</asientos>
  </sala>
- <sala><numero>#USACIPC2_202212333_5</numero><asientos>150</asientos></sala><sala><numero>#USACIPC2_202212333_4</numero><asientos>160</asientos></sala><sala><numero>#USACIPC2_202212333_6</numero><asientos>900</asientos></sala></salas>
+ <sala><numero>#USACIPC2_202109750_5</numero><asientos>150</asientos></sala><sala><numero>#USACIPC2_202109750_4</numero><asientos>160</asientos></sala><sala><numero>#USACIPC2_202109750_6</numero><asientos>900</asientos></sala></salas>
  </cine>
 </cines>

@@ -89,6 +89,25 @@ class listaDobleCircular:
             if nodo_actual == self.cabeza:
                 break
 
+    def mostrar_peliculas_categoria(self, categoria):
+        if self.cabeza is None:
+            print("La lista está vacía")
+            return
+
+        peliculas_encontradas = False
+        nodo_actual = self.cabeza
+        while True:
+            if nodo_actual.data.Categoria == categoria:
+                peliculas_encontradas = True
+                nodo_actual.data.imprimir()
+            nodo_actual = nodo_actual.next
+            if nodo_actual == self.cabeza:
+                break
+
+        if not peliculas_encontradas:
+            print(f"No se encontraron películas en la categoría '{categoria}'")
+
+
 
     def Imprimir_LDC(self):
         if self.cabeza is None:
@@ -107,6 +126,8 @@ class listaDobleCircular:
 
         for categoria in root.findall("categoria"):
             categor = categoria.find('nombre').text
+            peliculas_categoria = []
+            
             pelicula = categoria.find('peliculas')
 
             for indice, peli in enumerate(pelicula.findall('pelicula')):
@@ -117,6 +138,7 @@ class listaDobleCircular:
                 hora = peli.find('hora').text
 
                 objeto = Pelicula(categor, titulo, director, anio, fecha, hora)
+                peliculas_categoria.append(objeto)
 
                 if not self.existe_pelicula_titulo(objeto):
                     if operacion == 1:

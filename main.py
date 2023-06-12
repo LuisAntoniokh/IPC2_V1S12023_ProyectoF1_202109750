@@ -333,10 +333,6 @@ def Registrar_usuario():
 
     regresarMenuP()
 
-
-def catList():
-    pass
-
 def Ver_listado():
     print(Fore.RED + "\n==== Listado de películas ====")
     print(Fore.RED + "1. Listado general")
@@ -350,7 +346,9 @@ def Ver_listado():
         lenCircular.Imprimir_LDC()
         Ver_listado()
     elif segundoPaso == "2":
-        catList()
+        categoria = input(Fore.BLUE + "Ingrese la categoria para descubrir las peliculas: ")
+        lenCircular.mostrar_peliculas_categoria(categoria)
+        Ver_listado()
     elif segundoPaso == "3": 
         Pantalla_Inicial()
     else:
