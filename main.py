@@ -11,17 +11,17 @@ lenCircular = listaDobleCircular()
 lenDoble = ListaDobleEnlazada()
 
 def AgCat():
-    print(Fore.BLUE + "\n===== Registro de categoría y película =====")
-    Categoria = input(Fore.BLUE + "Ingrese la categoría: ")
-    Titulo = input(Fore.BLUE + "Ingrese el título: ")
-    Director = input(Fore.BLUE + "Ingrese el director: ")
-    Anio = input(Fore.BLUE + "Ingrese el anio: ")
-    Fecha = input(Fore.BLUE + "Ingrese la fecha: ")
-    Hora = input(Fore.BLUE + "Ingrese la hora: ")
+    print(Fore.LIGHTMAGENTA_EX + "\n===== Registro de categoría y película =====")
+    Categoria = input(Fore.LIGHTMAGENTA_EX + "Ingrese la categoría: ")
+    Titulo = input(Fore.LIGHTMAGENTA_EX + "Ingrese el título: ")
+    Director = input(Fore.LIGHTMAGENTA_EX + "Ingrese el director: ")
+    Anio = input(Fore.LIGHTMAGENTA_EX + "Ingrese el anio: ")
+    Fecha = input(Fore.BLULIGHTMAGENTA_EXE + "Ingrese la fecha: ")
+    Hora = input(Fore.LIGHTMAGENTA_EX + "Ingrese la hora: ")
 
     def regresarMenuP():
-        print(Fore.BLUE + "1. Registrar una nueva película")
-        print(Fore.BLUE + "2. Regresar al menú de películas \n")
+        print(Fore.LIGHTMAGENTA_EX + "1. Registrar una nueva película")
+        print(Fore.LIGHTMAGENTA_EX + "2. Regresar al menú de películas \n")
         tercerPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
         if tercerPaso == "1":
@@ -29,12 +29,12 @@ def AgCat():
         elif tercerPaso == "2":
             gesCat()
         else:
-            print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
+            print(Fore.RED+"Por favor, seleccione una opción válida")
             regresarMenuP()
 
     lenCircular.agregarXML_LDC(Categoria, Titulo, Director, Anio, Fecha, Hora)
-    print(Fore.BLUE + "\nSe ha registrado una nueva función")
-    print(Fore.BLUE + "================================= \n")
+    print(Fore.LIGHTMAGENTA_EX + "Se ha registrado una nueva función")
+    print(Fore.LIGHTMAGENTA_EX + "================================= \n")
     regresarMenuP()
     
 def modCat():
@@ -50,19 +50,20 @@ def modCat():
     print(Fore.BLUE + "\nLa película ha sido modificada correctamente\n")
 
 def delCat():
-    print(Fore.BLUE + "\n===== Eliminación de película =====")
-    titulo = input(Fore.BLUE + "Ingrese el título: ")
+    print(Fore.RED + "\n===== Eliminación de película =====")
+    titulo = input(Fore.RED + "Ingrese el título: ")
     lenCircular.eliminar_DLC(titulo)
     lenCircular.delete(titulo)
-    print(Fore.BLUE + "\nEl Usuario ha sido eliminado correctamente\n")
+    print(Fore.LIGHTGREEN_EX + "El Usuario ha sido eliminado correctamente")
+    print(Fore.RED + "================================= \n")
 
 def gesCat():
-    print(Fore.WHITE + "\n1. Cargar categorías y películas")
-    print(Fore.WHITE + "2. Ver categorías y películas")
-    print(Fore.WHITE + "3. Agregar categorías y películas")
-    print(Fore.WHITE + "4. Modificar categorías y películas")
-    print(Fore.WHITE + "5. Eliminar categorías y películas")
-    print(Fore.WHITE + "6. Regresar a gestiones\n")
+    print(Fore.YELLOW + "\n1. Cargar categorías y películas")
+    print(Fore.YELLOW + "2. Ver categorías y películas")
+    print(Fore.YELLOW + "3. Agregar categorías y películas")
+    print(Fore.YELLOW + "4. Modificar categorías y películas")
+    print(Fore.YELLOW + "5. Eliminar categorías y películas")
+    print(Fore.YELLOW + "6. Regresar a gestiones\n")
 
     quintoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
@@ -84,16 +85,16 @@ def gesCat():
     elif quintoPaso == "6":
         MenAdmin()
     else:
-        print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
+        print(Fore.RED+"Por favor, seleccione una opción válida")
         gesCat()
 
 def AgSal():
-    print(Fore.BLUE + "\n===== Registro de sala =====")
+    print(Fore.YELLOW + "\n===== Registro de sala =====")
     Asientos = input(Fore.BLUE + "Ingrese la cantidad de asientos: ")
 
     def regresarMenuP():
-        print(Fore.BLUE + "1. Registrar una nueva sala")
-        print(Fore.BLUE + "2. Regresar al menú de salas \n")
+        print(Fore.YELLOW + "1. Registrar una nueva sala")
+        print(Fore.YELLOW + "2. Regresar al menú de salas \n")
         tercerPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
         if tercerPaso == "1":
@@ -101,37 +102,39 @@ def AgSal():
         elif tercerPaso == "2":
             gesSal()
         else:
-            print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
+            print(Fore.RED+"Por favor, seleccione una opción válida")
             regresarMenuP()
 
     lenDoble.agregarXML_LED(Asientos)
-    print(Fore.BLUE + "\nSe ha registrado una nueva sala")
-    print(Fore.BLUE + "================================= \n")
+    print(Fore.YELLOW + "\nSe ha registrado una nueva sala")
+    print(Fore.YELLOW + "================================= \n")
     regresarMenuP()
 
 def modSal():
-    print(Fore.BLUE + "\n===== Modificación de salas =====")
-    Sale = input(Fore.BLUE + "Ingrese la sala a modificar: ")
-    chairs = input(Fore.BLUE + "Ingrese el nuevo numero de asientos: ")
+    print(Fore.CYAN + "\n===== Modificación de salas =====")
+    Sale = input(Fore.CYAN + "Ingrese la sala a modificar: ")
+    chairs = input(Fore.CYAN + "Ingrese el nuevo numero de asientos: ")
 
     lenDoble.editarXML_LED(Sale, chairs)
 
-    print(Fore.BLUE + "\nLa película ha sido modificada correctamente\n")
+    print(Fore.LIGHTGREEN_EX + "La película ha sido modificada correctamente") 
+    print(Fore.CYAN + "=========================================\n")
 
 def delSal():
-    print(Fore.BLUE + "\n===== Eliminación de sala =====")
-    sala = input(Fore.BLUE + "Ingrese el título: ")
+    print(Fore.RED + "\n===== Eliminación de sala =====")
+    sala = input(Fore.RED + "Ingrese el título: ")
     lenDoble.eliminar_LED(sala)
     lenDoble.delete(sala)
-    print(Fore.BLUE + "\nEl Usuario ha sido eliminado correctamente\n") 
+    print(Fore.LIGHTGREEN_EX + "El Usuario ha sido eliminado correctamente") 
+    print(Fore.RED + "=========================================\n")
 
 def gesSal():
-    print(Fore.WHITE + "\n1. Cargar salas")
-    print(Fore.WHITE + "2. Ver salas")
-    print(Fore.WHITE + "3. Agregar salas")
-    print(Fore.WHITE + "4. Modificar salas")
-    print(Fore.WHITE + "5. Eliminar salas")
-    print(Fore.WHITE + "6. Regresar a gestiones\n")
+    print(Fore.BLUE + "\n1. Cargar salas")
+    print(Fore.BLUE + "2. Ver salas")
+    print(Fore.BLUE + "3. Agregar salas")
+    print(Fore.BLUE + "4. Modificar salas")
+    print(Fore.BLUE + "5. Eliminar salas")
+    print(Fore.BLUE + "6. Regresar a gestiones\n")
 
     quintoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
@@ -157,24 +160,26 @@ def gesSal():
         gesSal()
 
 def modUser():
-    print(Fore.BLUE + "\n===== Modificación de usuario =====")
-    Email = input(Fore.BLUE + "Ingrese su correo: ")
-    Role = input(Fore.BLUE + "Ingrese su nuevo rol: ")
-    Nombre = input(Fore.BLUE + "Ingrese su nuevo nombre: ")
-    Apellido = input(Fore.BLUE + "Ingrese su nuevo apellido: ")
-    Telefono = input(Fore.BLUE + "Ingrese su nuevo teléfono: ")
-    Password = input(Fore.BLUE + "Ingrese su nueva contraseña: ")
+    print(Fore.CYAN + "\n===== Modificación de usuario =====")
+    Email = input(Fore.CYAN + "Ingrese su correo: ")
+    Role = input(Fore.CYAN + "Ingrese su nuevo rol: ")
+    Nombre = input(Fore.CYAN + "Ingrese su nuevo nombre: ")
+    Apellido = input(Fore.CYAN + "Ingrese su nuevo apellido: ")
+    Telefono = input(Fore.CYAN + "Ingrese su nuevo teléfono: ")
+    Password = input(Fore.CYAN + "Ingrese su nueva contraseña: ")
 
     lenSimple.editarXML(Role, Nombre, Apellido, Telefono, Email, Password)
 
-    print(Fore.BLUE + "\nEl Usuario ha sido modificado correctamente\n")
+    print(Fore.LIGHTGREEN_EX + "El Usuario ha sido modificado correctamente")
+    print(Fore.CYAN + "=========================================\n")
 
 def delUser():
-    print(Fore.BLUE + "\n===== Modificación de usuario =====")
-    Email = input(Fore.BLUE + "Ingrese su correo: ")
+    print(Fore.RED + "\n===== Modificación de usuario =====")
+    Email = input(Fore.RED + "Ingrese su correo: ")
     lenSimple.eliminarXML(Email)
     lenSimple.delete(Email)
-    print(Fore.BLUE + "\nEl Usuario ha sido eliminado correctamente\n")
+    print(Fore.LIGHTGREEN_EX + "El Usuario ha sido eliminado correctamente")
+    print(Fore.RED + "=========================================\n")
 
 def gesUser():
     print(Fore.WHITE + "\n1. Cargar datos")
@@ -201,12 +206,12 @@ def gesUser():
     elif quintoPaso == "5":
         MenAdmin()
     else:
-        print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
+        print(Fore.RED+"Por favor, seleccione una opción válida")
         gesUser()
 
 def gesBoletos():
-    print(Fore.WHITE + "\n1. Cancelar boletos")
-    print(Fore.WHITE + "2. Regresar al menú\n")
+    print(Fore.BLACK + "\n1. Cancelar boletos")
+    print(Fore.BLACK + "2. Regresar al menú\n")
 
     sextoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
@@ -215,7 +220,7 @@ def gesBoletos():
     elif sextoPaso == "2":
         MenAdmin()
     else:
-        print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
+        print(Fore.RED+"Por favor, seleccione una opción válida")
         gesBoletos()
 
 def MenAdmin():
@@ -311,7 +316,7 @@ def Registrar_usuario():
 
     def regresarMenuP():
         print(Fore.BLUE + "1. Registrar un nuevo usuario")
-        print(Fore.BLUE + "2. Regresar al menú principal")
+        print(Fore.BLUE + "2. Regresar al menú principal\n")
         tercerPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
         if tercerPaso == "1":
@@ -327,7 +332,7 @@ def Registrar_usuario():
         regresarMenuP()
     else:
         lenSimple.agregarXML(Nombre, Apellido, Telefono, correo, Password)
-        print(Fore.BLUE + "\nSe ha registrado un nuevo usuario")
+        print(Fore.LIGHTGREEN_EX + "Se ha registrado un nuevo usuario")
         print(Fore.BLUE + "================================= \n")
         regresarMenuP()
 
@@ -355,7 +360,6 @@ def Ver_listado():
         print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
         Ver_listado()
 
-
 def Pantalla_Inicial():
     print(Fore.CYAN + "\n======== Menú principal =========")
     print(Fore.CYAN + "| 1. Iniciar sesión             |")
@@ -375,7 +379,7 @@ def Pantalla_Inicial():
     elif primerPaso == "4": 
         exit()
     else:
-        print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
+        print(Fore.RED+"Por favor, seleccione una opción válida")
         Pantalla_Inicial()
 
 UserPrincipal = Usuario("administrador", "Luis", "Castro", "202109750", "a", "a")

@@ -1,3 +1,4 @@
+from colorama import Fore
 from Nodes.NodoDoble import NodoDoble
 from Objects.salas import Salas
 import xml.etree.ElementTree as ET
@@ -25,7 +26,7 @@ class ListaDobleEnlazada:
     def mostrar(self):
         current = self.cabeza
         while current is not None:
-            print(f"{current.data.cine}, Numero de sala: {current.data.num_sala}, Asiento: {current.data.asiento}")
+            print(Fore.WHITE + f"{current.data.cine}, Numero de sala: {current.data.num_sala}, Asiento: {current.data.asiento}")
             current = current.next
 
     def delete(self, data):

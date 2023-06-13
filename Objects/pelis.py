@@ -1,3 +1,5 @@
+from colorama import Fore
+
 class Pelicula():
     def __init__(self, Categoria, Titulo, Director, Anio, Fecha, Hora):
         self.Categoria = Categoria
@@ -8,5 +10,5 @@ class Pelicula():
         self.Hora = Hora
 
     def imprimir(self):
-        print(f"Categoria: {self.Categoria}, Titulo: {self.Titulo}, Director: {self.Director}, Año: {self.Anio}, Fecha: {self.Fecha}, Hora: {self.Hora}")
+        print(Fore.GREEN + f"Categoria: {self.Categoria}, Titulo: {self.Titulo}, Director: {self.Director}, Año: {self.Anio}, Fecha: {self.Fecha}, Hora: {self.Hora}")
         
