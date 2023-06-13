@@ -22,4 +22,4 @@
 
 
 
-</usuarios>
+<usuario><rol>Cliente</rol><nombre>Arno</nombre><apellido>Dorian</apellido><telefono>78945612</telefono><correo>AD@gmail.com</correo><contrasena>AD7</contrasena></usuario></usuarios>

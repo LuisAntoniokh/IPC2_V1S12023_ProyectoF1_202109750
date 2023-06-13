@@ -3,6 +3,7 @@ from Lists.simpleList import ListaEnlazada
 from Lists.dobleCircle import listaDobleCircular
 from Lists.dobleLinked import ListaDobleEnlazada
 import xml.etree.ElementTree as ET
+from Objects.pelis import Pelicula
 
 from Objects.user import Usuario
 
@@ -248,12 +249,84 @@ def MenAdmin():
         print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
         MenAdmin()
 
-def LisPel():
-    pass
+
+lista_historial = []
+
 def comBol():
-    pass
+    global lista_historial
+    print(Fore.YELLOW+"=== Películas Disponibles ===")
+    lenCircular.Imprimir_LDC()
+    titulo = input(Fore.CYAN+"Ingrese el título de la película que quiere ver: ")
+    pelicula_seleccionada = lenCircular.obtener_pelicula_por_titulo(titulo)
+    if pelicula_seleccionada is not None:
+        print("--- Detalles de la Película ---")
+        print("Título:", pelicula_seleccionada.Titulo)
+        print("Fecha:", pelicula_seleccionada.Fecha)
+        print("Hora:", pelicula_seleccionada.Hora)
+    else:
+        print("No se encontró la película con ese título.")
+        comBol()
+
+    n_boletos = input(Fore.YELLOW+"Ingrese el numero de boletos: ")
+
+    lenDoble.mostrar()
+
+    num_sala = input(Fore.CYAN+"Ingrese el número de sala: ")
+    sala_seleccionada = lenDoble.verificar_informacion(num_sala)
+    if sala_seleccionada is not None:
+        print("--- Detalles de la Sala ---")
+        print("Número de sala: ", sala_seleccionada.num_sala)
+        print("Cantidad de asientos: ", sala_seleccionada.asiento)
+    else:
+        print("El número de sala no coincide.")
+        comBol()
+
+    n_asiento = input("Ingrese el numero de asiento: ")
+    monto_total = int(n_boletos) * 42
+
+    datos_facturacion = input("Desea ingreasar datos de facturacion s/n")
+
+    nit = ""
+    nombre = ""
+    direccion = ""
+
+    if datos_facturacion.lower() == 's' :
+        nit = input(Fore.MAGENTA+"Ingrese el NIT ")
+        nombre = input(Fore.MAGENTA+"Ingrese el nombre ")
+        direccion = input(Fore.MAGENTA+"Ingrese la direccion ")
+
+    else:
+        nit="CF"
+        nombre="CF"
+        direccion ="CF"
+
+    obj_his = (pelicula_seleccionada.Titulo, pelicula_seleccionada.Fecha, pelicula_seleccionada.Hora, n_boletos, sala_seleccionada.num_sala, n_asiento, monto_total, nit, nombre, direccion)
+    lista_historial.append(obj_his)
+
+    for historial in lista_historial:
+        print(Fore.LIGHTBLUE_EX+f"{historial[0]} {historial[1]} {historial[2]} {historial[3]} {historial[4]} {historial[5]} {historial[6]} {historial[7]} {historial[8]} {historial[9]}")
+
+    def regresarMenuP():
+        print(Fore.BLUE + "1. Registrar un nuevo boleto")
+        print(Fore.BLUE + "2. Regresar al menú de cliente\n")
+        kick_back = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
+
+        if kick_back == "1":
+            comBol()
+        elif kick_back == "2":
+            MenCliente()
+        else:
+            print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
+            regresarMenuP()
+
+    regresarMenuP()
+
 def hisBol():
-    pass
+    global lista_historial
+    for historial in lista_historial:
+        print(Fore.LIGHTBLUE_EX+f"{historial[0]} {historial[1]} {historial[2]} {historial[3]} {historial[4]} {historial[5]} {historial[6]} {historial[7]} {historial[8]} {historial[9]}")
+    MenCliente()
+
 def favPel():
     pass
 
@@ -269,7 +342,8 @@ def MenCliente():
     cuartoPaso = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
     if cuartoPaso == "1":
-        LisPel()
+        lenCircular.Imprimir_LDC()
+        MenCliente()
     elif cuartoPaso == "2":
         comBol()
     elif cuartoPaso == "3":

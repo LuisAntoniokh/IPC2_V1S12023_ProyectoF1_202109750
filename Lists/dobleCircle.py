@@ -20,6 +20,20 @@ class listaDobleCircular:
             if nodo_actual == self.cabeza.next:
                 break
         return False
+    
+    def obtener_pelicula_por_titulo(self, titulo):
+        if self.cabeza is None:
+            return None
+
+        nodo_actual = self.cabeza
+        while True:
+            if nodo_actual.data.Titulo == titulo:
+                return nodo_actual.data
+            nodo_actual = nodo_actual.next
+            if nodo_actual == self.cabeza:
+                break
+
+        return None
 
     def add(self, data):
         titulo = data.Titulo

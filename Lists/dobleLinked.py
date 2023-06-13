@@ -8,6 +8,15 @@ class ListaDobleEnlazada:
         self.cabeza = None
         self.charged = False
 
+    def verificar_informacion(lista):
+        nodo_actual = lista.cabeza
+
+        while nodo_actual is not None:
+            sala = nodo_actual.data
+            sala.imprimir()  # Imprimir la información de la sala o realizar la verificación que desees
+
+            nodo_actual = nodo_actual.next
+
     def esta_vacia(self):
         return self.cabeza is None
 
