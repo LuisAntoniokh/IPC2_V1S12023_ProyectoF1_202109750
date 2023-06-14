@@ -252,7 +252,7 @@ def MenAdmin():
 
 lista_historial = []
 
-def comBol():
+def comBol(username):
     global lista_historial
     print(Fore.YELLOW+"=== Películas Disponibles ===")
     lenCircular.Imprimir_LDC()
@@ -265,7 +265,7 @@ def comBol():
         print("Hora:", pelicula_seleccionada.Hora)
     else:
         print("No se encontró la película con ese título.")
-        comBol()
+        comBol(username)
 
     n_boletos = input(Fore.YELLOW+"Ingrese el numero de boletos: ")
 
@@ -279,7 +279,7 @@ def comBol():
         print("Cantidad de asientos: ", sala_seleccionada.asiento)
     else:
         print("El número de sala no coincide.")
-        comBol()
+        comBol(username)
 
     n_asiento = input("Ingrese el numero de asiento: ")
     monto_total = int(n_boletos) * 42
@@ -287,20 +287,17 @@ def comBol():
     datos_facturacion = input("Desea ingreasar datos de facturacion s/n")
 
     nit = ""
-    nombre = ""
     direccion = ""
 
     if datos_facturacion.lower() == 's' :
         nit = input(Fore.MAGENTA+"Ingrese el NIT ")
-        nombre = input(Fore.MAGENTA+"Ingrese el nombre ")
         direccion = input(Fore.MAGENTA+"Ingrese la direccion ")
 
     else:
         nit="CF"
-        nombre="CF"
         direccion ="CF"
 
-    obj_his = (pelicula_seleccionada.Titulo, pelicula_seleccionada.Fecha, pelicula_seleccionada.Hora, n_boletos, sala_seleccionada.num_sala, n_asiento, monto_total, nit, nombre, direccion)
+    obj_his = (pelicula_seleccionada.Titulo, pelicula_seleccionada.Fecha, pelicula_seleccionada.Hora, n_boletos, sala_seleccionada.num_sala, n_asiento, monto_total, nit, username, direccion)
     lista_historial.append(obj_his)
 
     for historial in lista_historial:
@@ -312,25 +309,61 @@ def comBol():
         kick_back = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
 
         if kick_back == "1":
-            comBol()
+            comBol(username)
         elif kick_back == "2":
-            MenCliente()
+            MenCliente(username)
         else:
             print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
             regresarMenuP()
 
     regresarMenuP()
 
-def hisBol():
+def hisBol(username):
     global lista_historial
     for historial in lista_historial:
         print(Fore.LIGHTBLUE_EX+f"{historial[0]} {historial[1]} {historial[2]} {historial[3]} {historial[4]} {historial[5]} {historial[6]} {historial[7]} {historial[8]} {historial[9]}")
-    MenCliente()
+    MenCliente(username)
 
-def favPel():
-    pass
 
-def MenCliente():
+lista_favs = []
+
+def favPel(username):
+    global lista_favs
+    print(Fore.YELLOW+"\n========= Películas Disponibles ========= \n")
+    lenCircular.Imprimir_LDC()
+    print()
+    titulo = input(Fore.CYAN+"Ingrese el título de la película que guardar como favorita: ")
+    print()
+    pelicula_seleccionada = lenCircular.obtener_pelicula_por_titulo(titulo)
+    if pelicula_seleccionada is not None:
+        pass
+    else:
+        print("No se encontró la película con ese título.\n")
+        favPel(username)
+
+    obj_fav = (pelicula_seleccionada.Titulo, username)
+    lista_favs.append(obj_fav)
+
+    for historial in lista_favs:
+        print(Fore.WHITE +f"Usuario: {historial[1]}, Película favorita: {historial[0]}")
+
+    def regresarMenuP():
+        print(Fore.BLUE + "\n1. Registrar una nueva película favorita")
+        print(Fore.BLUE + "2. Regresar al menú de cliente\n")
+        kick_back = input(Fore.GREEN + "¿Qué acción quiere realizar? ")
+
+        if kick_back == "1":
+            favPel(username)
+        elif kick_back == "2":
+            MenCliente(username)
+        else:
+            print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida\n")
+            regresarMenuP()
+
+    regresarMenuP()
+
+
+def MenCliente(username):
     print(Fore.LIGHTMAGENTA_EX + "\n======== Opciones =========")
     print(Fore.LIGHTMAGENTA_EX + "1. Listado películas ")
     print(Fore.LIGHTMAGENTA_EX + "2. Comprar boletos ")
@@ -343,18 +376,18 @@ def MenCliente():
 
     if cuartoPaso == "1":
         lenCircular.Imprimir_LDC()
-        MenCliente()
+        MenCliente(username)
     elif cuartoPaso == "2":
-        comBol()
+        comBol(username)
     elif cuartoPaso == "3":
-        hisBol()
+        hisBol(username)
     elif cuartoPaso == "4":
-        favPel()
+        favPel(username)
     elif cuartoPaso == "5":
         Pantalla_Inicial()
     else:
         print(Fore.LIGHTGREEN_EX+"Por favor, seleccione una opción válida")
-        MenCliente()
+        MenCliente(username)
 
 def Iniciar_sesion():
     print(Fore.YELLOW + "\n======= Inicio de sesión ========")
@@ -368,7 +401,7 @@ def Iniciar_sesion():
             if actual.data.contraseña == Password:
                 print(Fore.GREEN+"Inicio de sesión exitoso")
                 if actual.data.rol == "Cliente" or actual.data.rol == "cliente":
-                    MenCliente()
+                    MenCliente(actual.data.nombre)
                 elif actual.data.rol == "Administrador" or actual.data.rol == "administrador":
                     MenAdmin()
                 else:
