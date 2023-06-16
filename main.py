@@ -17,7 +17,7 @@ def AgCat():
     Titulo = input(Fore.LIGHTMAGENTA_EX + "Ingrese el título: ")
     Director = input(Fore.LIGHTMAGENTA_EX + "Ingrese el director: ")
     Anio = input(Fore.LIGHTMAGENTA_EX + "Ingrese el anio: ")
-    Fecha = input(Fore.BLULIGHTMAGENTA_EXE + "Ingrese la fecha: ")
+    Fecha = input(Fore.LIGHTMAGENTA_EX + "Ingrese la fecha: ")
     Hora = input(Fore.LIGHTMAGENTA_EX + "Ingrese la hora: ")
 
     def regresarMenuP():
@@ -409,9 +409,10 @@ def Iniciar_sesion():
                 return
             else:
                 print(Fore.RED+"Contraseña incorrecta")
-                return
+                Iniciar_sesion()
         actual = actual.next
     print(Fore.RED+"Correo electrónico no encontrado")
+    Pantalla_Inicial()
 
 def Registrar_usuario():
     print(Fore.BLUE + "\n===== Registro de usuario =====")
