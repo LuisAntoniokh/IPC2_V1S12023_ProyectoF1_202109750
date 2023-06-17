@@ -140,7 +140,6 @@ class listaDobleCircular:
 
         for categoria in root.findall("categoria"):
             categor = categoria.find('nombre').text
-            peliculas_categoria = []
             
             pelicula = categoria.find('peliculas')
 
@@ -152,7 +151,6 @@ class listaDobleCircular:
                 hora = peli.find('hora').text
 
                 objeto = Pelicula(categor, titulo, director, anio, fecha, hora)
-                peliculas_categoria.append(objeto)
 
                 if not self.existe_pelicula_titulo(objeto):
                     if operacion == 1:
