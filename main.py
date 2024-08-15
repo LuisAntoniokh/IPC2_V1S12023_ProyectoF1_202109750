@@ -18,7 +18,7 @@ def AgCat():
     Director = input(Fore.LIGHTMAGENTA_EX + "Ingrese el director: ")
     Anio = input(Fore.LIGHTMAGENTA_EX + "Ingrese el anio: ")
     Fecha = input(Fore.LIGHTMAGENTA_EX + "Ingrese la fecha: ")
-    Hora = input(Fore.LIGHTMAGENTA_EX + "Ingrese la hora: ")
+    Hora = input(Fore.LIGHTMAGENTA_EX + "Ingrese la horas: ")
 
     def regresarMenuP():
         print(Fore.LIGHTMAGENTA_EX + "1. Registrar una nueva película")
